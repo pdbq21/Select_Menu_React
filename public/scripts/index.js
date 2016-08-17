@@ -12,7 +12,7 @@
             var HTML_Li_SelectMenu = props.text.map(function (key, index) {
                 return <li data-reactid={index}>
                     <div className='col-md-4 col-sm-4 col-xs-4 nameCity'>
-                        <span onClick={props.onClickCity}>{key.name}</span>
+                        <span onClick={props.onClickCity} >{key.name}</span>
                     </div>
                 </li>
 
@@ -66,38 +66,40 @@
         },
 
         handleClickInput: function (event) {
-            this.loadCommentsFromServer();
-          this.changePosition(event);
+
+            if (!(this.state.data.length)) {
+
+                this.loadCommentsFromServer();
+            }
+
+            this.changePosition(event);
 
         },
 
         handleClickCity: function (element) {
-
-            console.log(`click span : add class = 'active'`);
+            element.target.className = 'active';
 
         },
 
+        changePosition: function (element) {
 
+            if (element.target.getBoundingClientRect().top < 220) { // 220 = height 'selectMenu'
 
+                this.changePosition.style = {'marginTop': 1 + 'em'};
 
-    changePosition: function(element){
-
-            if (element.target.getBoundingClientRect().top < 200 ) { // 200 = height 'selectMenu'
-
-                this.changePosition.style = {'marginTop': 1+'em'};
-
-            }else{
-                this.changePosition.style = {'top': -620+'%'};
+            } else {
+                this.changePosition.style = {'top': -620 + '%'};
 
             }
-
+            this.setState({data: ''});
         },
 
         render: function () {
             if (this.state.data.length) {
                 var listCity = (
                     <HTML_Container_SelectMenu text={this.state.data} onClickCity={this.handleClickCity}
-                    style={this.changePosition.style}
+                                               style={this.changePosition.style}
+                                               classNameActive={this.handleClickCity.className}
                     />
                 );
             }
