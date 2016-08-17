@@ -21,18 +21,42 @@
     });
 
     var SelectMenuApp = React.createClass({
+        /*loadCommentsFromServer: function() {
+            $.ajax({
+                url: this.props.url,
+                type: 'GET',
+                dataType: 'json',
+                cache: false,
+                success: function(data) {
+                    this.setState({data: data});
+                }.bind(this)//,
+                error: function(xhr, status, err) {
+                 console.error(this.props.url, status, err.toString());
+                 }.bind(this)
+            });
+        },*/
 
+        getInitialState: function(){
+
+          return {
+data: []
+          };
+        },
+        /*componentDidMount: function() {
+            this.loadCommentsFromServer();
+            setInterval(this.loadCommentsFromServer, this.props.pollInterval);
+            console.log(this.state.data);
+        },*/
 
         render: function () {
 
-             var HtmlSelectMenu = (<SelectMenu />);
             return (
 
                 <div className="container">
                     <div className="row">
-                        <div className="col-md-12 col-sm-12 col-xs-12 test"></div>
+                        <div className="col-md-12 col-sm-12 col-xs-12 test">{this.state.data}</div>
 
-                         {HtmlSelectMenu}
+                        <SelectMenu />
 
                         <div className="col-md-12 col-sm-12 col-xs-12 test"></div>
                     </div>
@@ -58,5 +82,6 @@
     });
 
 
-    ReactDOM.render(<SelectMenuApp />, document.getElementById('selectMenu'));
+    ReactDOM.render(<SelectMenuApp url="http://localhost:8000/json-router/cities/" pollInterval={2000} />,
+        document.getElementById('selectMenuApp'));
 })();
