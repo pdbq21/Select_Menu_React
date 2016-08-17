@@ -47,7 +47,7 @@
             return {
                 data: [],
                 position: 0, // position 0 = Up / 1 = Down of relatively windows
-                cityList: [] // here add to selected city
+                cityList: '' // here add to selected city
             };
         },
 
@@ -78,7 +78,8 @@
 
         handleClickCity: function (element) {
             element.target.className = 'active';
-
+            this.state.cityList += element.target.value;
+            setState({cityList: this.state.cityList})
         },
 
         changePosition: function (element) {
@@ -99,7 +100,7 @@
                 var listCity = (
                     <HTML_Container_SelectMenu text={this.state.data} onClickCity={this.handleClickCity}
                                                style={this.changePosition.style}
-                                               classNameActive={this.handleClickCity.className}
+
                     />
                 );
             }
