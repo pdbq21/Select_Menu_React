@@ -29,7 +29,7 @@
 
                         </div>
                         <div className='col-md-12 col-sm-12 col-xs-12'>
-                            <button type='submit' className='btn btn-default'>Done</button>
+                            <button type='submit' onClick={this.props.onClickDone} className='btn btn-default'>Done</button>
                         </div>
                     </div>
                 </div>
@@ -113,12 +113,16 @@ event.target.value = this.state.cityList;
             this.setState({data: ''});
         },
 
+        handleClickDone: function (){
+            this.setState({data: ''});
+        },
+
         render: function () {
             if (this.state.data.length) {
                 var listCity = (
                     <HTML_Container_SelectMenu text={this.state.data} onClickCity={this.handleClickCity}
                                                style={this.changePosition.style}
-
+                                               onClickDone={this.handleClickDone}
                     />
                 );
             }
