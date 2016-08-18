@@ -72,11 +72,18 @@
 
             if (!(this.state.data.length)) {
                 this.loadCommentsFromServer();
+                this.state.cityList.splice(0);
             }
 
             this.changePosition(event);
 
-            event.target.value = this.state.cityList;
+            event.target.parentNode.lastElementChild.style.visibility =
+                event.target.parentNode.lastElementChild.hasAttribute("id") && "visible" ===
+                event.target.parentNode.lastElementChild.style.visibility ? "hidden" : "visible";
+
+
+            //event.target.value = this.state.cityList;
+           // this.setState({data: this.state.data});
         },
 
         handleClickCity: function (element) {
@@ -98,7 +105,7 @@
                     }
                 }
             }
-
+            this.setState({cityList: this.state.cityList});
         },
 
         changePosition: function (element) {
@@ -109,13 +116,14 @@
         this.changePosition.style = {'top': -620 + '%', 'visibility': 'visible'};
     }
 
-            this.setState({data: this.state.data});
+
 
         },
 
         handleClickDone: function (element) {
-            this.setState({data: ''});
+            this.setState({data: []});
             element.target.parentNode.parentNode.parentNode.parentNode.firstElementChild.focus();
+            //this.state.cityList.splice(0);
         },
 
         render: function () {
@@ -136,6 +144,7 @@
                         <div className="col-md-12 col-sm-12 col-xs-12" id="forPhone">
                             <form action="" className="inputForm">
                                 <input type="text" className="form-control" placeholder="City"
+                                       value={this.state.cityList}
                                        onClick={this.handleClickInput}/>
                                 {listCity}
 
