@@ -90,11 +90,11 @@
 
             if (element.target.parentNode.className === 'col-md-4 col-sm-4 col-xs-4 nameCity') {
                 element.target.parentNode.className += ' active';
-                if (this.state.cityList.length) {
+                //if (this.state.cityList.length) {
                     this.state.cityList.push(' ' + element.target.textContent);
-                } else {
+               /* } else {
                     this.state.cityList.push(element.target.textContent);
-                }
+                }*/
             } else {
                 element.target.parentNode.className = 'col-md-4 col-sm-4 col-xs-4 nameCity';
                 for (var i = this.state.cityList.length - 1; i >= 0; i--) {
