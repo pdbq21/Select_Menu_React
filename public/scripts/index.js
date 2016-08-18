@@ -3,7 +3,6 @@
  */
 (function () {
 
-
     /************************ View ************************************/
     var HTML_Container_SelectMenu = React.createClass({
 
@@ -12,7 +11,7 @@
             var HTML_Li_SelectMenu = props.text.map(function (key, index) {
                 return <li data-reactid={index}>
                     <div className='col-md-4 col-sm-4 col-xs-4 nameCity' data-reactid={index}>
-                        <span onClick={props.onClickCity} data-reactid={index} >{key.name}</span>
+                        <span onClick={props.onClickCity} data-reactid={index}>{key.name}</span>
                     </div>
                 </li>
 
@@ -29,15 +28,14 @@
 
                         </div>
                         <div className='col-md-12 col-sm-12 col-xs-12'>
-                            <button type='submit' onClick={this.props.onClickDone} className='btn btn-default'>Done</button>
+                            <button type='submit' onClick={this.props.onClickDone} className='btn btn-default'>Done
+                            </button>
                         </div>
                     </div>
                 </div>
             );
         }
     });
-
-
     /********************* View end ************************************/
 
     var SelectMenuApp = React.createClass({
@@ -50,6 +48,10 @@
                 cityList: [] // here add to selected city
 
             };
+        },
+
+        componentWillReceiveProps: function () {
+
         },
 
         loadCommentsFromServer: function () {
@@ -69,27 +71,26 @@
         handleClickInput: function (event) {
 
             if (!(this.state.data.length)) {
-
                 this.loadCommentsFromServer();
             }
 
             this.changePosition(event);
 
-event.target.value = this.state.cityList;
+            event.target.value = this.state.cityList;
         },
 
         handleClickCity: function (element) {
 
-            if (element.target.parentNode.className === 'col-md-4 col-sm-4 col-xs-4 nameCity'){
+            if (element.target.parentNode.className === 'col-md-4 col-sm-4 col-xs-4 nameCity') {
                 element.target.parentNode.className += ' active';
-                if (this.state.cityList.length){
-                    this.state.cityList.push(' '+element.target.textContent);
-                }else{
+                if (this.state.cityList.length) {
+                    this.state.cityList.push(' ' + element.target.textContent);
+                } else {
                     this.state.cityList.push(element.target.textContent);
                 }
-            }else {
+            } else {
                 element.target.parentNode.className = 'col-md-4 col-sm-4 col-xs-4 nameCity';
-                   for (var i = this.state.cityList.length - 1; i >= 0; i--) {
+                for (var i = this.state.cityList.length - 1; i >= 0; i--) {
 
                     if (this.state.cityList[i].trim() === element.target.textContent) {
                         this.state.cityList.splice(i, 1);
@@ -102,19 +103,19 @@ event.target.value = this.state.cityList;
 
         changePosition: function (element) {
 
-            if (element.target.getBoundingClientRect().top < 220) { // 220 = height 'selectMenu'
+    if (element.target.getBoundingClientRect().top < 220) { // 220 = height 'selectMenu'
+        this.changePosition.style = {'marginTop': 1 + 'em', 'visibility': 'visible'};
+    } else {
+        this.changePosition.style = {'top': -620 + '%', 'visibility': 'visible'};
+    }
 
-                this.changePosition.style = {'marginTop': 1 + 'em'};
+            this.setState({data: this.state.data});
 
-            } else {
-                this.changePosition.style = {'top': -620 + '%'};
-
-            }
-            this.setState({data: ''});
         },
 
-        handleClickDone: function (){
+        handleClickDone: function (element) {
             this.setState({data: ''});
+            element.target.parentNode.parentNode.parentNode.parentNode.firstElementChild.focus();
         },
 
         render: function () {
@@ -148,9 +149,7 @@ event.target.value = this.state.cityList;
             );
         }
 
-
     });
-
 
     ReactDOM.render(<SelectMenuApp url="http://localhost:8000/json-router/cities/"/>,
         document.getElementById('selectMenuApp'));
