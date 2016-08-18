@@ -11,8 +11,8 @@
             var props = this.props;
             var HTML_Li_SelectMenu = props.text.map(function (key, index) {
                 return <li data-reactid={index}>
-                    <div className='col-md-4 col-sm-4 col-xs-4 nameCity'>
-                        <span onClick={props.onClickCity} >{key.name}</span>
+                    <div className='col-md-4 col-sm-4 col-xs-4 nameCity' data-reactid={index}>
+                        <span onClick={props.onClickCity} data-reactid={index} >{key.name}</span>
                     </div>
                 </li>
 
@@ -47,7 +47,8 @@
             return {
                 data: [],
                 position: 0, // position 0 = Up / 1 = Down of relatively windows
-                cityList: '' // here add to selected city
+                cityList: [] // here add to selected city
+
             };
         },
 
@@ -74,12 +75,29 @@
 
             this.changePosition(event);
 
+event.target.value = this.state.cityList;
         },
 
         handleClickCity: function (element) {
-            element.target.className = 'active';
-            this.state.cityList += element.target.value;
-            setState({cityList: this.state.cityList})
+
+            if (element.target.parentNode.className === 'col-md-4 col-sm-4 col-xs-4 nameCity'){
+                element.target.parentNode.className += ' active';
+                if (this.state.cityList.length){
+                    this.state.cityList.push(' '+element.target.textContent);
+                }else{
+                    this.state.cityList.push(element.target.textContent);
+                }
+            }else {
+                element.target.parentNode.className = 'col-md-4 col-sm-4 col-xs-4 nameCity';
+                   for (var i = this.state.cityList.length - 1; i >= 0; i--) {
+
+                    if (this.state.cityList[i].trim() === element.target.textContent) {
+                        this.state.cityList.splice(i, 1);
+                        break;
+                    }
+                }
+            }
+
         },
 
         changePosition: function (element) {
