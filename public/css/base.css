@@ -44,12 +44,7 @@
 
   z-index: 10;
 }
-.up{
-  top: -620%;
-}
-.down{
-  margin-top: 1em;
-}
+
 
 #selectMenu ul{
   padding-left: 0px;
