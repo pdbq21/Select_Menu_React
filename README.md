@@ -1,22 +1,9 @@
-# React Tutorial
+# Select Menu with React
 
-### Node
+### Start
 
 ```sh
 npm install
-node server.js
+npm start
+open in browser: localhost:3000
 ```
-localhost : 3000
-/*************************/
-    + bootstrap
-
-/****************************************/
-    + style.css => base.css
-
-
-
-
-/*******************************************/
-
-/******************/
-Struct:

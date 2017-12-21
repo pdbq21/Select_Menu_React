@@ -160,6 +160,6 @@
 
     });
 
-    ReactDOM.render(<SelectMenuApp url="http://localhost:8000/json-router/cities/"/>,
+    ReactDOM.render(<SelectMenuApp url="https://pdbq21.github.io/plugin-select-menu/cities.json"/>,
         document.getElementById('selectMenuApp'));
 })();
